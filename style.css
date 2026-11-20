@@ -59,7 +59,7 @@ h2{font-size:clamp(2.4rem,7vw,4.5rem);margin-bottom:2rem}
 .card-title{font-family:Anton,Impact,sans-serif;font-weight:400;font-size:1.6rem;text-transform:uppercase;margin:0 0 .3rem;color:inherit}
 .card-text{margin:0;opacity:.75;word-break:break-word;color:inherit}
 footer{padding:2rem 5vw;font-weight:600;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap}
-@supports (animation-timeline:view()){section h2,.about>*,.cards{animation:rev linear both;animation-timeline:view();animation-range:entry 0% entry 60%}}
+@supports (animation-timeline:view()){section h2,.about>*,.cards,.proj,.linha{animation:rev linear both;animation-timeline:view();animation-range:entry 0% entry 60%}}
 @keyframes rev{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:none}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
 
@@ -75,7 +75,7 @@ section{overflow-x:clip}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .navbar-toggler-icon{filter:invert(1)}}
 .foto img{cursor:zoom-in}
 
-/* Centralizar o site */
+/* Centralizar e Sobre mim */
 .wrap{max-width:70rem;margin-left:auto;margin-right:auto}
 section h2{text-align:center}
 .hero,.cur,#contato{text-align:center}
@@ -86,8 +86,34 @@ section h2{text-align:center}
 .foto,.facts{margin-left:auto;margin-right:auto}
 .facts{max-width:22rem}
 .cards{justify-content:center}
-/* Sobre mim: título junto do texto e foto mais perto */
-#sobre h2,
-#sobre .about{max-width:58rem;margin-left:auto;margin-right:auto}
+#sobre h2,#sobre .about{max-width:58rem;margin-left:auto;margin-right:auto}
 #sobre h2{text-align:left;padding-left:1.5rem}
-#sobre .about{align-items:center}
+
+/* Novidades */
+.hero .digita{font-family:Anton,Impact,sans-serif;font-size:clamp(1.3rem,3.5vw,2rem);text-transform:uppercase;margin:1rem auto 0;min-height:1.4em}
+.cursor{margin-left:2px;animation:piscar 1s steps(1) infinite}
+@keyframes piscar{50%{opacity:0}}
+.navbar .nav-link.active{background-size:100% 3px;color:var(--ink)}
+.linha{list-style:none;padding:0 0 0 2rem;border-left:4px solid var(--ink)}
+.linha.wrap{max-width:46rem}
+.linha li{position:relative;padding:0 0 2.2rem 1.5rem}
+.linha li:last-child{padding-bottom:0}
+.linha li::before{content:"";position:absolute;left:-43px;top:.45rem;width:18px;height:18px;background:var(--ink);border:4px solid var(--bg);outline:3px solid var(--ink)}
+.marco{font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-size:.9rem}
+.linha h3,.sub{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;margin:.2rem 0 .4rem}
+.linha h3{font-size:1.8rem}
+.sub{font-size:1.8rem;margin-bottom:1rem}
+.linha p{margin:0;max-width:38rem}
+.projeto:hover{background:var(--card);color:var(--ink);transform:translateY(-6px);box-shadow:8px 8px 0 color-mix(in srgb,var(--ink) 35%,transparent)}
+.projeto .skills{margin-top:0}
+.vazio{border-style:dashed;opacity:.75}
+.contato-extra{text-align:left}
+.form-control{background:var(--bg);color:var(--ink);border:2px solid var(--ink);border-radius:0}
+.form-control:focus{background:var(--bg);color:var(--ink);border-color:var(--ink);box-shadow:4px 4px 0 var(--ink)}
+.redes{display:flex;gap:1rem;font-size:1.5rem}
+.redes a{text-decoration:none;transition:transform .2s}
+.redes a:hover{transform:translateY(-4px) scale(1.15)}
+.voltar{position:fixed;right:1.2rem;bottom:calc(1.2rem + env(safe-area-inset-bottom,0px));width:3rem;height:3rem;border:3px solid var(--ink);border-radius:0;background:var(--bg);color:var(--ink);font-size:1.4rem;display:grid;place-items:center;opacity:0;pointer-events:none;transform:translateY(10px);transition:opacity .25s,transform .25s,background .2s,color .2s;z-index:20}
+.voltar.show{opacity:1;pointer-events:auto;transform:none}
+.voltar:hover{background:var(--ink);color:var(--bg)}
+.skip{position:absolute;left:1rem;top:1rem;z-index:50;background:var(--ink);color:var(--bg);padding:.5rem 1rem}

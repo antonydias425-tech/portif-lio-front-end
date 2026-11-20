@@ -26,3 +26,44 @@ document.getElementById("tema").addEventListener("click",()=>{
   root.dataset.theme=novo;root.dataset.bsTheme=novo;
   try{localStorage.setItem("tema",novo)}catch(e){}
 });
+
+// Efeito de digitação no topo
+const frases=["Estudante de Engenharia de Software","Futuro desenvolvedor","Corinthiano de coração","Apaixonado por tecnologia e jogos"];
+const dig=document.getElementById("digita");
+if(dig){
+  if(matchMedia("(prefers-reduced-motion: reduce)").matches){dig.textContent=frases[0]}
+  else{
+    let f=0,i=0,apaga=false;
+    (function tick(){
+      const t=frases[f];
+      dig.textContent=t.slice(0,i);
+      if(!apaga&&i===t.length){apaga=true;return setTimeout(tick,1600)}
+      if(apaga&&i===0){apaga=false;f=(f+1)%frases.length}
+      i+=apaga?-1:1;
+      setTimeout(tick,apaga?35:70);
+    })();
+  }
+}
+
+// Botão voltar ao topo
+const voltar=document.getElementById("voltar");
+addEventListener("scroll",()=>voltar.classList.toggle("show",scrollY>400),{passive:true});
+voltar.addEventListener("click",()=>scrollTo({top:0,behavior:"smooth"}));
+
+// Botões de copiar
+document.querySelectorAll("[data-copiar]").forEach(b=>b.addEventListener("click",async()=>{
+  const original=b.innerHTML;
+  try{await navigator.clipboard.writeText(b.dataset.copiar);b.innerHTML='<i class="bi bi-check2 me-2"></i>Copiado!'}
+  catch(e){b.textContent="Copie: "+b.dataset.copiar}
+  setTimeout(()=>{b.innerHTML=original},2000);
+}));
+
+// Formulário: valida e abre o programa de e-mail já preenchido
+const form=document.getElementById("form");
+form.addEventListener("submit",e=>{
+  e.preventDefault();
+  if(!form.checkValidity()){form.classList.add("was-validated");return}
+  const nome=form.nome.value.trim(),email=form.email.value.trim(),msg=form.msg.value.trim();
+  const corpo=`Olá, Antony! Meu nome é ${nome} (${email}).\n\n${msg}`;
+  location.href="mailto:antonydias425@gmail.com?subject="+encodeURIComponent("Contato pelo portfólio - "+nome)+"&body="+encodeURIComponent(corpo);
+});
